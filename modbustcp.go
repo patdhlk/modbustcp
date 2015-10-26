@@ -1,6 +1,9 @@
 package modbustcp
 
-import ()
+import (
+	"errors"
+	"net"
+)
 
 const (
 	FunctionReadCoil                  = 1
@@ -32,6 +35,8 @@ const (
 type ModbusTcpClient struct {
 	IpAddress string
 	Port      int
+	Timeout   int
+	Conn      net.Conn
 }
 
 func NewModbusTcpClient(ipAddress string, port int) *ModbusTcpClient {
@@ -49,7 +54,10 @@ func (c *ModbusTcpClient) Disconnect() {
 
 }
 
-func (c *ModbusTcpClient) ReadDiscreteInputs() {
+func (c *ModbusTcpClient) ReadDiscreteInputs(startingAddress, quantity int) ([]bool, error) {
+	if startingAddress > 65535 || quantity > 2000 {
+		return nil, errors.New("Starting address must be 0-65535, quantity must be 0 - 2000")
+	}
 
 }
 
@@ -82,13 +90,5 @@ func (c *ModbusTcpClient) WriteMultipleRegisters() {
 }
 
 func (c *ModbusTcpClient) ReadWriteMultipleRegisters() {
-
-}
-
-func (c *ModbusTcpClient) WriteMultipleRegisters() {
-
-}
-
-func (c *ModbusTcpClient) WriteMultipleRegisters() {
 
 }
