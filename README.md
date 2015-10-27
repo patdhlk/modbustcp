@@ -7,4 +7,4 @@ golang ModbusTCP library
 
 ## documentation
 
-https://godoc.org/github.com/patdhlk/modbustcp
+[GoDoc Reference](https://godoc.org/github.com/patdhlk/modbustcp)
